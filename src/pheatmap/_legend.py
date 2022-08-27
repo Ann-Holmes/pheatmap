@@ -6,7 +6,7 @@ from typing import Sequence, Dict, Tuple
 from numpy import ndarray
 from matplotlib.colors import Colormap, Normalize, BoundaryNorm
 from matplotlib.axes import Axes
-from _utils import CONTINUOUS, DISCRETE
+from ._utils import CONTINUOUS, DISCRETE
 
 
 class Legend:

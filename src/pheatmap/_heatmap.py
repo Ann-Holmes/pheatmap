@@ -4,7 +4,7 @@ from typing import Union, List
 from numpy import ndarray
 from matplotlib.colors import Colormap
 from matplotlib.axes import Axes
-from _utils import get_norm, get_cmap
+from ._utils import get_norm, get_cmap
 
 
 class Heatmap:

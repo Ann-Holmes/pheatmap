@@ -6,7 +6,7 @@ from pandas import DataFrame, Series
 from typing import Union, Dict, Tuple, List
 from matplotlib.colors import Colormap, Normalize, BoundaryNorm
 from matplotlib.axes import Axes
-from _utils import get_norm, get_cmap, cycle_cmap, CONTINUOUS, DISCRETE, HORIZONTAL, VERTICAL
+from ._utils import get_norm, get_cmap, cycle_cmap, CONTINUOUS, DISCRETE, HORIZONTAL, VERTICAL
 
 
 def _object2categrey(anno: DataFrame) -> DataFrame:

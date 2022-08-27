@@ -1,1 +1,1 @@
-from _pheatmap import pheatmap
+from ._pheatmap import pheatmap

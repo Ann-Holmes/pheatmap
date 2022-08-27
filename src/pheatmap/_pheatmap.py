@@ -6,11 +6,11 @@ from numpy import ndarray
 from typing import Union, Sequence, Dict, List
 from matplotlib.colors import Colormap
 from matplotlib.figure import Figure
-from _heatmap import Heatmap
-from _annotation import ListAnnotationBar
-from _legend import Legend
-from _layout import Layout
-from _utils import HORIZONTAL, VERTICAL, CONTINUOUS, DISCRETE
+from ._heatmap import Heatmap
+from ._annotation import ListAnnotationBar
+from ._legend import Legend
+from ._layout import Layout
+from ._utils import HORIZONTAL, VERTICAL, CONTINUOUS, DISCRETE
 
 
 def none2dict(x: Dict = None) -> Dict:
@@ -119,7 +119,7 @@ def pheatmap(
     annotation_bar_width: float = 0.03, legend_bar_width: float = 1.5 * 0.03,
     annotation_bar_space: float = 0.2, legend_bar_space: float = 1
 ) -> Figure:
-    """_summary_
+    """Plot heatmap with annotation bars
 
     Parameters
     ----------
