@@ -101,7 +101,7 @@ def pheatmap(
     name: str = None, rownames: ndarray = None, colnames: ndarray = None,
     rownames_side: str = "left", colnames_side: str = "bottom",
     show_rownames: bool = True, show_colnames: bool = True,
-    rownames_style: dict = dict(rotation=0, size=6), 
+    rownames_style: dict = dict(rotation=0, size=6),
     colnames_style: dict = dict(rotation=0, size=6),
     edgecolor: str = "none", edgewidth: float = 1,
     annotation_row: DataFrame = None, annotation_col: DataFrame = None,
@@ -349,27 +349,3 @@ def pheatmap(
             legend.draw(ax)
 
     return layout.fig
-
-
-if __name__ == '__main__':
-    # mat = pd.DataFrame(
-    #     dict(a=np.arange(1000), b=np.arange(1000, 2000), c=np.arange(2000, 3000)),
-    #     index=["zyxwvutsrq"[i % 10] for i in np.arange(1000)]
-    # ).T
-    nrows = 30
-    mat = pd.DataFrame(np.arange(nrows * 1000).reshape(-1, 1000))
-    anno_row = pd.DataFrame(
-        dict(anno1=np.arange(nrows), anno2=["CNS"[i % 3] for i in np.arange(nrows)])
-    )
-    anno_col = pd.DataFrame(
-        dict(anno2=np.arange(1000), anno3=["abcdefghigk"[i % 10] for i in np.arange(1000)])
-    )
-    fig = pheatmap(
-        mat,
-        annotation_row=anno_row,
-        annotation_col=anno_col,
-        show_colnames=False,
-        # rownames_side="right", colnames_side="bottom",
-        # wspace=0.3, legend_bar_space=1.5
-    )
-    fig.savefig("pheatmap.png")

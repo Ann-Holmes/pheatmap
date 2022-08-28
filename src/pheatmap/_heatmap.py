@@ -164,17 +164,3 @@ class Heatmap:
         else:
             ax.spines[:].set_visible(False)
             ax.grid(False, axis="both", which="both")
-
-
-if __name__ == '__main__':
-    fig, ax = plt.subplots(figsize=(4, 4))
-    mat = np.arange(200).reshape(10, 20)
-    # cmap = ["red", "white", "blue"]
-    ht = Heatmap(
-        mat, cmap="bwr",
-        colnames=np.arange(mat.shape[1]),
-        colnames_side="top",
-        colnames_style=dict(rotation=90, color="blue", fontstyle="normal", fontsize=3),
-        edgecolor="g")
-    ht.draw(ax)
-    plt.savefig("tmp.pdf")

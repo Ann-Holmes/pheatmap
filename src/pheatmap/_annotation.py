@@ -212,27 +212,3 @@ class ListAnnotationBar:
     def draw(self, axes: List[Axes]) -> None:
         for annobar, ax in zip(self.annotationbars, axes):
             annobar.draw(ax)
-
-
-if __name__ == '__main__':
-    fig, axes = plt.subplots(nrows=3, figsize=(16, 3), squeeze=False)
-    test2 = np.random.randint(0, 9, 1000)
-    df = pd.DataFrame({"test1": np.arange(0, 10, 0.01),
-                       "test2": test2,
-                       "test3": ["abcdefghi"[i] for i in test2]})
-    annobar_list = ListAnnotationBar(
-        df, cmaps={"test1": "Blues", "test2": "Set1", "test3": "Set1"})
-    annobar_list.draw(axes.flat)
-    plt.savefig("tmp1.pdf")
-
-    fig, axes = plt.subplots(ncols=3, figsize=(3, 16), squeeze=False)
-    test2 = np.random.randint(0, 9, 1000)
-    df = pd.DataFrame({"test1": np.arange(0, 10, 0.01),
-                       "test2": test2,
-                       "test3": ["abcdefghi"[i] for i in test2]})
-    annobar_list = ListAnnotationBar(df,
-                                     cmaps={"test1": ["red", "white", "blue"],
-                                            "test2": "Set1", "test3": "Set1"},
-                                     direction=VERTICAL)
-    annobar_list.draw(axes.flat)
-    plt.savefig("tmp2.pdf")
