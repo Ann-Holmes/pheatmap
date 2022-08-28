@@ -13,7 +13,7 @@ class testAnnotationBar(unittest.TestCase):
     def test_attribute_bartype_cmap_norm(self):
         bartype_cases = {
             CONTINUOUS: [np.arange(100), "bwr", None, Normalize, LinearSegmentedColormap], 
-            CONTINUOUS: [np.arange(100), "Set1", None, Normalize, None], 
+            CONTINUOUS: [np.arange(100), "Set1", None, Normalize, LinearSegmentedColormap], 
             DISCRETE: [np.random.randint(0, 3, 100), "Set1", {"abc"[i]: i for i in np.arange(0, 3)}, BoundaryNorm, ListedColormap], 
             DISCRETE: [np.random.randint(0, 3, 100), "bwr", {"abc"[i]: i for i in np.arange(0, 3)}, BoundaryNorm, None], 
             "Others": [None, None, None, None, None]

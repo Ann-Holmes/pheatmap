@@ -74,7 +74,8 @@ def get_cmap(cmap: Union[Colormap, str, list], cmap_type: str = CONTINUOUS) -> C
         raise TypeError("'cmap' must be `Colormap` type!")
     
     if (cmap_type == CONTINUOUS) and (not isinstance(cmap, LinearSegmentedColormap)):
-        raise TypeError(f"'cmap' must be 'LinearSegmentedColormap' for {CONTINUOUS}!")
+        cmap = LinearSegmentedColormap.from_list("from_list", cmap.colors)
+        return cmap
     elif (cmap_type == DISCRETE) and (not isinstance(cmap, ListedColormap)):
         raise TypeError(f"'cmap' must be 'ListedColormap' for {DISCRETE}")
     else:
