@@ -243,9 +243,9 @@ def pheatmap(
     legends.append(Legend(
         cmap=heatmap.cmap, norm=heatmap.norm, name=legend_titles.pop(heatmap.name, heatmap.name),
         tick_locs=legend_tick_locs.pop(
-            heatmap.name, np.linspace(heatmap.mat.min(), heatmap.mat.max(), 5)),
+            heatmap.name, np.linspace(heatmap.norm.vmin, heatmap.norm.vmax, 5)),
         tick_labels=legend_tick_labels.pop(
-            heatmap.name, np.linspace(heatmap.mat.min(), heatmap.mat.max(), 5)),
+            heatmap.name, np.linspace(heatmap.norm.vmin, heatmap.norm.vmax, 5)),
         tick_labels_params=legend_tick_labels_params,
         title_params=legend_title_params,
         bartype=CONTINUOUS
@@ -256,9 +256,9 @@ def pheatmap(
         for anno_bar in row_annotationbars.annotationbars:
             if anno_bar.bartype == CONTINUOUS:
                 tick_locs = legend_tick_locs.pop(
-                    anno_bar.name, np.linspace(anno_bar.values.min(), anno_bar.values.max(), 5))
+                    anno_bar.name, np.linspace(anno_bar.norm.vmin, anno_bar.norm.vmax, 5))
                 tick_labels = legend_tick_labels.pop(
-                    anno_bar.name, np.linspace(anno_bar.values.min(), anno_bar.values.max(), 5))
+                    anno_bar.name, np.linspace(anno_bar.norm.vmin, anno_bar.norm.vmax, 5))
             else:
                 tick_locs = legend_tick_locs.pop(
                     anno_bar.name, list(anno_bar.values_mapper.values()))
@@ -276,9 +276,9 @@ def pheatmap(
         for anno_bar in col_annotationbars.annotationbars:
             if anno_bar.bartype == CONTINUOUS:
                 tick_locs = legend_tick_locs.pop(
-                    anno_bar.name, np.linspace(anno_bar.values.min(), anno_bar.values.max(), 5))
+                    anno_bar.name, np.linspace(anno_bar.norm.vmin, anno_bar.norm.vmax, 5))
                 tick_labels = legend_tick_labels.pop(
-                    anno_bar.name, np.linspace(anno_bar.values.min(), anno_bar.values.max(), 5))
+                    anno_bar.name, np.linspace(anno_bar.norm.vmin, anno_bar.norm.vmax, 5))
             else:
                 tick_locs = legend_tick_locs.pop(
                     anno_bar.name, list(anno_bar.values_mapper.values()))
@@ -292,14 +292,6 @@ def pheatmap(
                 title_params=legend_title_params,
                 bartype=anno_bar.bartype
             ))
-
-    # Layout
-    # width, height = width, height
-    # bar_width = 1 / 20
-    # legend_bar_width = 1.5 * bar_width
-
-    # annotation_bar_space = 0.3
-    # legend_bar_space = 0.3
 
     n_leftbars = len(row_annotationbars.annotationbars) if row_annotationbars is not None else 1
     n_rightbars = len(legends) if len(legends) > 0 else 1
