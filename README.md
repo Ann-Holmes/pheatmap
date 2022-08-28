@@ -1,6 +1,7 @@
 # pheatmap
 
 [![codecov](https://codecov.io/gh/Ann-Holmes/pheatmap/branch/main/graph/badge.svg?token=MTTRU5NLA8)](https://codecov.io/gh/Ann-Holmes/pheatmap)
+
 pheatmap for Python
 
 You can create a heatmap with its annotation bars, just like pheatmap of R. 
