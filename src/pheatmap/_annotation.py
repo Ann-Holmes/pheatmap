@@ -81,8 +81,6 @@ class AnnotationBar:
         self.cmap = get_cmap(cmap, self.bartype)
         self.norm = self._get_norm(vmin, vmax)
 
-        self.legend = None
-
     def _check_bartype(self, bartype: str) -> str:
         """Validate `bar_type`"""
         if bartype in [CONTINUOUS, DISCRETE]:
@@ -134,10 +132,10 @@ class AnnotationBar:
         side_dict = {"labeltop": False, "labelbottom": False,
                      "labelleft": False, "labelright": False}
         if self.direction == HORIZONTAL:
-            side_dict["labelright"] = all([True, self.name is not None])
+            side_dict["labelright"] = bool(self.name)
             side_dict["labelrotation"] = 0
         else:
-            side_dict["labelbottom"] = all([True, self.name is not None])
+            side_dict["labelbottom"] = bool(self.name)
             side_dict["labelrotation"] = 90
         return side_dict
 

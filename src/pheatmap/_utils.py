@@ -23,8 +23,8 @@ def get_norm(values: ndarray, vmin: float, vmax: float) -> Normalize:
     -------
     Normalize
     """
-    vmin = vmin if vmin else values.min()
-    vmax = vmax if vmax else values.max()
+    vmin = vmin if vmin is not None else values.min()
+    vmax = vmax if vmax is not None else values.max()
     return Normalize(vmin=vmin, vmax=vmax)
 
 
@@ -62,11 +62,20 @@ def get_cmap(cmap: Union[Colormap, str, list], cmap_type: str = CONTINUOUS) -> C
     Colormap
     """
     if isinstance(cmap, str):
-        return plt.colormaps[cmap]
+        cmap =  plt.colormaps[cmap]
     elif isinstance(cmap, list):
         if cmap_type == CONTINUOUS:
-            return LinearSegmentedColormap.from_list("from_list", colors=cmap)
+            cmap = LinearSegmentedColormap.from_list("from_list", colors=cmap)
         else:
-            return ListedColormap(colors=cmap)
+            cmap = ListedColormap(colors=cmap)
+    elif isinstance(cmap, Colormap):
+        pass
+    else:
+        raise TypeError("'cmap' must be `Colormap` type!")
+    
+    if (cmap_type == CONTINUOUS) and (not isinstance(cmap, LinearSegmentedColormap)):
+        raise TypeError(f"'cmap' must be 'LinearSegmentedColormap' for {CONTINUOUS}!")
+    elif (cmap_type == DISCRETE) and (not isinstance(cmap, ListedColormap)):
+        raise TypeError(f"'cmap' must be 'ListedColormap' for {DISCRETE}")
     else:
         return cmap

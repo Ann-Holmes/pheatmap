@@ -63,7 +63,6 @@ class Heatmap:
         self.sides = self._parse_name_side(rownames_side, colnames_side)
 
         self.rownames_style, self.colnames_style = rownames_style, colnames_style
-        # self.edge_kwargs = {"edgecolors": edgecolor, "linewidth": edgewidth}
         self.edgecolor = edgecolor
         self.edgewidth = edgewidth
 
@@ -123,20 +122,19 @@ class Heatmap:
 
         Raises
         ------
-        KeyError
+        ValueError
             If the row/column names provided are not correct will raise KeyError
         """
         num = self.nrows if axis == "row" else self.ncols
         if names is None:
             return names
         elif len(names) != num:
-            raise KeyError(
+            raise ValueError(
                 f"The length of {axis}names is not equal to the number of heatmap matrix!")
         else:
             return names
 
     def draw(self, ax: Axes) -> None:
-        # ax.pcolormesh(self.mat, norm=self.norm, cmap=self.cmap, **self.edge_kwargs)
         ax.imshow(self.mat, norm=self.norm, cmap=self.cmap, aspect="auto")
 
         # Set row/colnames and their font style(rotation, family, size, etc)

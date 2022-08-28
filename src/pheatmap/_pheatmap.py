@@ -51,10 +51,7 @@ def check_margin_names(df_margin_names: ndarray, margin_names: Sequence = None,
     elif margin_names is None:
         return df_margin_names
     elif len(df_margin_names) == len(margin_names):
-        if len(margin_names) < 20:
-            return np.array(margin_names)
-        else:
-            return None
+        return np.array(margin_names)
     else:
         raise ValueError(f"The length of {axis}names is not match `mat`!")
 
