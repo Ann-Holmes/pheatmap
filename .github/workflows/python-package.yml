@@ -38,3 +38,6 @@ jobs:
     - name: Test with unittest
       run: |
         python -m unittest discover -s src
+        
+    - name: Codecov
+      uses: codecov/codecov-action@v3.1.0
