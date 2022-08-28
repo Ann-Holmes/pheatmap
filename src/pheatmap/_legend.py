@@ -65,27 +65,3 @@ class Legend:
             pass
         else:
             raise KeyError(f"'bartype' must be {[CONTINUOUS, DISCRETE]}!")
-
-
-if __name__ == '__main__':
-    fig, axes = plt.subplots(ncols=2, figsize=(2, 8), tight_layout=True)
-    # Continuous
-    cmap = plt.colormaps["bwr"]
-    norm = Normalize(-1, 1)
-    tick_locs = [-1, -0.5, 0, 0.5, 1]
-    tick_labels = [-1, -0.5, 0, 0.5, 1]
-
-    legend = Legend(tick_locs=tick_locs, tick_labels=tick_labels,
-                    cmap=cmap, norm=norm, name="continuous")
-    legend.draw(axes[0])
-
-    # Discrete
-    cmap = plt.colormaps["Set1"]
-    norm = BoundaryNorm(np.arange(-0.5, 5), 5)
-    tick_locs = np.arange(5)
-    tick_labels = ["abcdefgh"[i] for i in tick_locs]
-    legend = Legend(tick_locs=tick_locs, tick_labels=tick_labels,
-                    cmap=cmap, norm=norm, name="discrete", bartype=DISCRETE)
-    legend.draw(axes[1])
-
-    plt.savefig("tmp.pdf")
