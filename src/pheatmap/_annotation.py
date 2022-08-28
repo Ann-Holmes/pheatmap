@@ -142,19 +142,19 @@ class AnnotationBar:
         return side_dict
 
     def draw(self, ax: Axes) -> None:
-        ax.pcolormesh(self.values, norm=self.norm, cmap=self.cmap)
+        ax.imshow(self.values, norm=self.norm, cmap=self.cmap, aspect="auto")
         ax.tick_params(
             axis="both", pad=0, top=False, bottom=False, left=False, right=False,
             **self.name_attrs
         )
         if self.direction == HORIZONTAL:
-            ax.set_yticks([0.5], [self.name], **dict(size=6))
+            ax.set_yticks([0], [self.name], **dict(size=6))
         elif self.direction == VERTICAL:
-            ax.set_xticks([0.5], [self.name], **dict(size=6))
-            ax.invert_yaxis()
+            ax.set_xticks([0], [self.name], **dict(size=6))
         else:
             raise KeyError("`direction` have to be chose from ['horizontal', 'vertical']!")
         ax.spines[:].set_visible(False)
+        ax.grid(False)
 
 
 class ListAnnotationBar:

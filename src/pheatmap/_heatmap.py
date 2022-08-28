@@ -63,7 +63,9 @@ class Heatmap:
         self.sides = self._parse_name_side(rownames_side, colnames_side)
 
         self.rownames_style, self.colnames_style = rownames_style, colnames_style
-        self.edge_kwargs = {"edgecolors": edgecolor, "linewidth": edgewidth}
+        # self.edge_kwargs = {"edgecolors": edgecolor, "linewidth": edgewidth}
+        self.edgecolor = edgecolor
+        self.edgewidth = edgewidth
 
     def _get_nrows_ncols(self):
         return self.mat.shape
@@ -134,21 +136,36 @@ class Heatmap:
             return names
 
     def draw(self, ax: Axes) -> None:
-        ax.pcolormesh(self.mat, norm=self.norm, cmap=self.cmap, **self.edge_kwargs)
+        # ax.pcolormesh(self.mat, norm=self.norm, cmap=self.cmap, **self.edge_kwargs)
+        ax.imshow(self.mat, norm=self.norm, cmap=self.cmap, aspect="auto")
 
         # Set row/colnames and their font style(rotation, family, size, etc)
-        ax.set_xticks(np.arange(self.ncols) + 0.5, labels=self.colnames, **self.colnames_style)
-        ax.set_yticks(np.arange(self.nrows) + 0.5, labels=self.rownames, **self.rownames_style)
-        ax.invert_yaxis()
+        ax.set_xticks(np.arange(self.ncols), labels=self.colnames,
+                      minor=False, **self.colnames_style)
+        ax.set_yticks(np.arange(self.nrows), labels=self.rownames,
+                      minor=False, **self.rownames_style)
 
         # Set ticks and ticklabels location and if show them
         ax.tick_params(
-            axis="both", pad=0, top=False, bottom=False, left=False, right=False,
+            axis="both", which="major", pad=0, top=False, bottom=False, left=False, right=False,
             **self.sides
         )
 
-        # Turn spines off
-        ax.spines[:].set_visible(False)
+        # Configure edges color and width
+        if self.edgecolor:
+            ax.set_xticks(np.arange(-0.5, self.ncols), minor=True)
+            ax.set_yticks(np.arange(-0.5, self.nrows), minor=True)
+            ax.tick_params(axis="both", which="minor", pad=0,
+                           top=False, bottom=False, left=False, right=False)
+            # For whole Axes
+            ax.spines[:].set_color(self.edgecolor)
+            ax.spines[:].set_linewidth(self.edgewidth)
+            # For every cells
+            ax.grid(True, axis="both", which="minor",
+                    color=self.edgecolor, linewidth=self.edgewidth)
+        else:
+            ax.spines[:].set_visible(False)
+            ax.grid(False, axis="both", which="both")
 
 
 if __name__ == '__main__':
