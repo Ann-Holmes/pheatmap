@@ -1,6 +1,7 @@
 import unittest
 import numpy as np
 import pandas as pd
+import os
 from pheatmap import pheatmap
 
 
@@ -30,5 +31,10 @@ class test_pheatmap(unittest.TestCase):
             self.mat, annotation_row=self.anno_row, annotation_col=self.anno_col,
             annotation_row_cmaps=self.anno_row_cmaps, annotation_col_cmaps=self.anno_col_cmaps
         )
-        fig.savefig("tests/pheatmap.png")
-        fig.savefig("tests/pheatmap.pdf")
+        fig.savefig("pheatmap.png")
+        fig.savefig("pheatmap.pdf")
+
+    def tearDown(self) -> None:
+        for file in ["pheatmap.png", "pheatmap.pdf"]:
+            if os.path.exists(file):
+                os.remove(file)

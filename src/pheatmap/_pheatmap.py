@@ -1,16 +1,15 @@
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 from pandas import DataFrame
 from numpy import ndarray
-from typing import Union, Sequence, Dict, List
+from typing import Union, Sequence, Dict
 from matplotlib.colors import Colormap
 from matplotlib.figure import Figure
 from ._heatmap import Heatmap
 from ._annotation import ListAnnotationBar
 from ._legend import Legend
 from ._layout import Layout
-from ._utils import HORIZONTAL, VERTICAL, CONTINUOUS, DISCRETE
+from ._utils import HORIZONTAL, VERTICAL, CONTINUOUS
 
 
 def none2dict(x: Dict = None) -> Dict:

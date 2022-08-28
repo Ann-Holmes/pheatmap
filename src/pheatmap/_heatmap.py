@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from typing import Union, List
+from typing import Union
 from numpy import ndarray
 from matplotlib.colors import Colormap
 from matplotlib.axes import Axes

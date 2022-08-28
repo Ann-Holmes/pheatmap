@@ -1,9 +1,7 @@
-import warnings
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-from typing import Sequence, Dict, Tuple
-from numpy import ndarray
+from typing import Sequence, Dict
 from matplotlib.colors import Colormap, Normalize, BoundaryNorm
 from matplotlib.axes import Axes
 from ._utils import CONTINUOUS, DISCRETE
