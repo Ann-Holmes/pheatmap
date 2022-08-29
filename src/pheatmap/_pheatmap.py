@@ -109,8 +109,8 @@ def pheatmap(
     annotation_col_cmaps: Dict[str, Union[str, Colormap, list]] = None,
     show_annotation_row_names: bool = True, show_annotation_col_names: bool = True,
     legend_tick_locs: Dict[str, Sequence] = None, legend_tick_labels: Dict[str, Sequence] = None,
-    legend_tick_labels_params: Dict = dict(size=6),
-    legend_titles: Dict[str, bool] = None, legend_title_params: Dict = dict(size=6),
+    legend_tick_labels_styles: Dict = dict(size=6),
+    legend_titles: Dict[str, bool] = None, legend_title_styles: Dict = dict(size=6),
     width: float = 8, height: float = 6, wspace: float = 0.1, hspace: float = 0.1,
     annotation_bar_width: float = 0.03, legend_bar_width: float = 1.5 * 0.03,
     annotation_bar_space: float = 0.2, legend_bar_space: float = 1
@@ -172,14 +172,14 @@ def pheatmap(
         modify the tick labels of legend, keys are the name of heatmap or the column names of
         annotation DataFrame. The length of each legend tick labels must be matched with its tick
         locations. by default None
-    legend_tick_labels_params : Dict, optional
+    legend_tick_labels_styles : Dict, optional
         modify the each legend tick labels' style. Keys are the name of heatmap or the column names
         of annotation DataFrame. More informations see `rownames_style`. by default dict(size=6)
     legend_titles : Dict[str, bool], optional
-        modify the each legend title. Others are the same as `legend_tick_labels_params`.
+        modify the each legend title. Others are the same as `legend_tick_labels`.
         by default None
-    legend_title_params : Dict, optional
-        modify the each legend title's style. Others are the same as `legend_tick_labels_params`.
+    legend_title_styles : Dict, optional
+        modify the each legend title's style. Others are the same as `legend_tick_labels_styles`.
         by default dict(size=6)
     width : float, optional
         the whole figure width, by default 8
@@ -235,9 +235,9 @@ def pheatmap(
     legends = []
     legend_tick_locs = none2dict(legend_tick_locs)
     legend_tick_labels = none2dict(legend_tick_labels)
-    legend_tick_labels_params = none2dict(legend_tick_labels_params)
+    legend_tick_labels_styles = none2dict(legend_tick_labels_styles)
     legend_titles = none2dict(legend_titles)
-    legend_title_params = none2dict(legend_title_params)
+    legend_title_styles = none2dict(legend_title_styles)
 
     # Heatmap's legend
     legends.append(Legend(
@@ -246,8 +246,8 @@ def pheatmap(
             heatmap.name, np.linspace(heatmap.norm.vmin, heatmap.norm.vmax, 5)),
         tick_labels=legend_tick_labels.pop(
             heatmap.name, np.linspace(heatmap.norm.vmin, heatmap.norm.vmax, 5)),
-        tick_labels_params=legend_tick_labels_params,
-        title_params=legend_title_params,
+        tick_labels_params=legend_tick_labels_styles,
+        title_params=legend_title_styles,
         bartype=CONTINUOUS
     ))
 
@@ -268,8 +268,8 @@ def pheatmap(
             legends.append(Legend(
                 cmap=anno_bar.cmap, norm=anno_bar.norm, name=anno_bar.name,
                 tick_locs=tick_locs, tick_labels=tick_labels,
-                tick_labels_params=legend_tick_labels_params,
-                title_params=legend_title_params,
+                tick_labels_params=legend_tick_labels_styles,
+                title_params=legend_title_styles,
                 bartype=anno_bar.bartype
             ))
     if col_annotationbars is not None:
@@ -288,8 +288,8 @@ def pheatmap(
             legends.append(Legend(
                 cmap=anno_bar.cmap, norm=anno_bar.norm, name=anno_bar.name,
                 tick_locs=tick_locs, tick_labels=tick_labels,
-                tick_labels_params=legend_tick_labels_params,
-                title_params=legend_title_params,
+                tick_labels_params=legend_tick_labels_styles,
+                title_params=legend_title_styles,
                 bartype=anno_bar.bartype
             ))
 

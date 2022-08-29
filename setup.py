@@ -8,7 +8,7 @@ long_description = (here / "README.md").read_text(encoding="utf-8")
 
 setup(
     name="pheatmap",  # Required
-    version="0.0.6",  # Required
+    version="0.1.0.dev2",  # Required
     description="pheatmap for Python",  # Optional
     long_description=long_description,  # Optional
     long_description_content_type="text/markdown",  # Optional (see note above)
@@ -32,6 +32,9 @@ setup(
     packages=find_packages(where="src", exclude=["tests"]),  # Required
     python_requires=">=3.8, <4",
     install_requires=["numpy", "matplotlib", "pandas"],  # Optional
+    extras_require={  # Optional
+        "dev": ["sphinx", "myst-parser"]
+    },
     project_urls={  # Optional
         # "Documents": "",
         "Bug Reports": "https://github.com/Ann-Holmes/pheatmap/issues",
