@@ -36,15 +36,30 @@ class Legend:
         bartype : str, optional
             the legend bar type(CONTINUOUS or DISCRETE), by default CONTINUOUS
         """
-        self.ticks = tick_locs
-        self.labels = tick_labels
+        self.ticks = np.array(tick_locs)
+        self.labels = np.array(tick_labels)
         self.tick_labels_params = tick_labels_params
         self.title_params = title_params
         self.cmap = cmap
-        self.norm = norm
+        self.norm = self._scale_norm(norm)
         self.name = name if name else ""
         self.bartype = bartype
         self.cbar = None
+    
+    def _scale_norm(self, norm):
+        """Scale the continuous norm by the tick_locs"""
+        if isinstance(norm, BoundaryNorm):
+            return norm
+        else:
+            if self.ticks.min() < norm.vmin:
+                vmin = self.ticks.min()
+            else:
+                vmin = norm.vmin
+            if self.ticks.max() > norm.vmax:
+                vmax = self.ticks.max()
+            else:
+                vmax = norm.vmax
+            return Normalize(vmin, vmax)
 
     def draw(self, ax: Axes) -> None:
         self.cbar = mpl.colorbar.Colorbar(
