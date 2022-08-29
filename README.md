@@ -2,13 +2,23 @@
 
 [![codecov](https://codecov.io/gh/Ann-Holmes/pheatmap/branch/main/graph/badge.svg?token=MTTRU5NLA8)](https://codecov.io/gh/Ann-Holmes/pheatmap)
 
-pheatmap for Python
+`pheatmap` for Python.
 
 You can create a heatmap with its annotation bars, just like pheatmap of R. 
 
+## Requirements
+
+`pheatmap` need `python` > 3.8, and `numpy`, `pandas` and `matplolib`. 
+
 ## Install
 
+You can install `pheatmap` by `pip`. 
 
+```shell
+pip install pheatmap
+```
+
+Run the command above, `pip` will automatically install `numpy`, `pandas` and `matplolib`.
 
 ## Usage
 
@@ -46,7 +56,7 @@ fig.savefig("tests/pheatmap.png")
 Run the above code at the ipython or jupyter notebook. You can see the fellow heatmap with its
 annotation bars. 
 
-![heatmap](pic/pheatmap.png)
+![heatmap](https://raw.githubusercontent.com/Ann-Holmes/pheatmap/main/pic/pheatmap.png)
 
 Also, you can save the figure to file. For example, save the figure to `PDF` file. 
 
