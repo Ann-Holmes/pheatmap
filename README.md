@@ -4,7 +4,7 @@
 
 `pheatmap` for Python.
 
-You can create a heatmap with its annotation bars, just like pheatmap of R. 
+You can create a heatmap with its annotation bars, just like pheatmap of R. Documnets at [here](https://pheatmap.readthedocs.io/en/latest/)
 
 ## Requirements
 
