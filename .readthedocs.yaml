@@ -12,5 +12,9 @@ build:
     python: "3.8"
 
 python:
-  - install:
+  install:
     - requirements: docs/requirements.txt
+    - method: pip
+      path: .
+    - method: setuptools
+      path: .
