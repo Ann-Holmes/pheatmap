@@ -8,7 +8,7 @@ long_description = (here / "README.md").read_text(encoding="utf-8")
 
 setup(
     name="pheatmap",  # Required
-    version="0.1.0.dev1",  # Required
+    version="0.1.0.dev2",  # Required
     description="pheatmap for Python",  # Optional
     long_description=long_description,  # Optional
     long_description_content_type="text/markdown",  # Optional (see note above)
