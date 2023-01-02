@@ -48,7 +48,8 @@ class AnnotationBar:
         values: ndarray, cmap: Union[str, Colormap, List],
         values_mapper: Dict[str, number] = None,
         name: str = None, vmin: float = None, vmax: float = None,
-        bartype: str = CONTINUOUS, direction: str = HORIZONTAL
+        bartype: str = CONTINUOUS, direction: str = HORIZONTAL,
+        tick_labels_params: Dict = dict(size=6)
     ) -> None:
         """single AnnotationBar
 
@@ -80,6 +81,7 @@ class AnnotationBar:
         self.values_mapper = values_mapper
         self.cmap = get_cmap(cmap, self.bartype)
         self.norm = self._get_norm(vmin, vmax)
+        self.tick_labels_params = tick_labels_params
 
     def _check_bartype(self, bartype: str) -> str:
         """Validate `bar_type`"""
@@ -146,9 +148,9 @@ class AnnotationBar:
             **self.name_attrs
         )
         if self.direction == HORIZONTAL:
-            ax.set_yticks([0], [self.name], **dict(size=6))
+            ax.set_yticks([0], [self.name], **self.tick_labels_params)
         elif self.direction == VERTICAL:
-            ax.set_xticks([0], [self.name], **dict(size=6))
+            ax.set_xticks([0], [self.name], **self.tick_labels_params)
         else:
             raise KeyError("`direction` have to be chose from ['horizontal', 'vertical']!")
         ax.spines[:].set_visible(False)
@@ -158,7 +160,8 @@ class AnnotationBar:
 class ListAnnotationBar:
     def __init__(
         self, anno: DataFrame, cmaps: Dict[str, Union[str, Colormap, List]],
-        direction: str = HORIZONTAL, show_names: bool = True
+        direction: str = HORIZONTAL, show_names: bool = True,
+        tick_labels_params: Dict = dict(size=6)
     ) -> None:
         """Contain multiple Annotationbars
 
@@ -172,12 +175,14 @@ class ListAnnotationBar:
             visualize bar as HORIZONTAL or VERTICAL, by default HORIZONTAL
         show_names : bool, optional
             show AnnotationBar name or not, by default True
+        tick_labels_params: Dict
         """
         anno = _object2categrey(anno)
 
         self.cmaps = cmaps
         self.direction = direction
         self.show_names = show_names
+        self.tick_labels_params = tick_labels_params
         self.annotationbars = self._get_annotation_bars(anno)
 
     def _get_annotation_bars(self, anno: DataFrame) -> List[AnnotationBar]:
@@ -204,7 +209,8 @@ class ListAnnotationBar:
             name = name if self.show_names else None
             tmp_annobar = AnnotationBar(
                 values=values.to_numpy(), cmap=cmap, values_mapper=values_mapper,
-                name=name, vmin=None, vmax=None, bartype=bartype, direction=self.direction
+                name=name, vmin=None, vmax=None, bartype=bartype, direction=self.direction,
+                tick_labels_params=self.tick_labels_params
             )
             annotationbars.append(tmp_annobar)
         return annotationbars
