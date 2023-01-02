@@ -57,7 +57,7 @@ def check_margin_names(df_margin_names: ndarray, margin_names: Sequence = None,
 
 def create_annotation(
         anno: Union[DataFrame, None], cmaps: Dict[str, Union[str, Colormap, list]],
-        show_names: bool, expected_nrows: int, axis="row"
+        names_style: Dict, show_names: bool, expected_nrows: int, axis="row"
 ) -> Union[ListAnnotationBar, None]:
     """Instance row/column `ListAnnotationBar`
 
@@ -73,6 +73,9 @@ def create_annotation(
         the number of row/columns of main DataFrame
     axis : str, optional
         "row" or "col" annotation?, by default "row"
+    names_style: Dict[str, Dict], optional
+        modify the style of row AnnotationBars' label.
+
 
     Returns
     -------
@@ -89,7 +92,10 @@ def create_annotation(
     elif anno.shape[0] == expected_nrows:
         axis = VERTICAL if axis == "row" else HORIZONTAL
         cmaps = none2dict(cmaps)
-        return ListAnnotationBar(anno=anno, cmaps=cmaps, direction=axis, show_names=show_names)
+        return ListAnnotationBar(
+            anno=anno, cmaps=cmaps, direction=axis, show_names=show_names,
+            tick_labels_params=names_style
+        )
     else:
         raise ValueError(f"The number of annotation_{axis}'s rows is not match `mat`!")
 
@@ -107,6 +113,8 @@ def pheatmap(
     annotation_row: DataFrame = None, annotation_col: DataFrame = None,
     annotation_row_cmaps: Dict[str, Union[str, Colormap, list]] = None,
     annotation_col_cmaps: Dict[str, Union[str, Colormap, list]] = None,
+    annotation_row_names_style: Dict = dict(size=6),
+    annotation_col_names_style: Dict = dict(size=6),
     show_annotation_row_names: bool = True, show_annotation_col_names: bool = True,
     legend_tick_locs: Dict[str, Sequence] = None, legend_tick_labels: Dict[str, Sequence] = None,
     legend_tick_labels_styles: Dict = dict(size=6),
@@ -161,6 +169,12 @@ def pheatmap(
         "viridis" for continuous and "tab20" for discrete
     annotation_col_cmaps : Dict[str, Union[str, Colormap, list]], optional
         see `annotation_row_cmaps`, by default None
+    annotation_row_names_style: Dict[str, Dict], optional
+        modify the style of row AnnotationBar's name. Keys are the DataFrame's columns, by default
+        None
+    annotation_col_names_style: Dict[str, Dict], optional
+        modify the style of column AnnotationBar's name. Keys are the DataFrame's columns, by
+        default None
     show_annotation_row_names : bool, optional
         whether show row Annotationbar's name, by default True
     show_annotation_col_names : bool, optional
@@ -224,11 +238,11 @@ def pheatmap(
     # Row/Column Annotations
     row_annotationbars = create_annotation(
         anno=annotation_row, cmaps=annotation_row_cmaps, show_names=show_annotation_row_names,
-        expected_nrows=heatmap.nrows, axis="row"
+        expected_nrows=heatmap.nrows, axis="row", names_style = annotation_row_names_style
     )
     col_annotationbars = create_annotation(
         anno=annotation_col, cmaps=annotation_col_cmaps, show_names=show_annotation_col_names,
-        expected_nrows=heatmap.ncols, axis="col"
+        expected_nrows=heatmap.ncols, axis="col", names_style = annotation_col_names_style
     )
 
     # Legends
