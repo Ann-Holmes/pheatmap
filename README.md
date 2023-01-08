@@ -47,8 +47,8 @@ anno_row_cmaps = {"anno1": "Blues", "anno2": "Set1"}
 anno_col_cmaps = {"anno3": "Purples", "anno4": "Set3"}
 
 fig = pheatmap(
-    self.mat, annotation_row=self.anno_row, annotation_col=self.anno_col,
-    annotation_row_cmaps=self.anno_row_cmaps, annotation_col_cmaps=self.anno_col_cmaps
+    mat, annotation_row=anno_row, annotation_col=anno_col,
+    annotation_row_cmaps=anno_row_cmaps, annotation_col_cmaps=anno_col_cmaps
 )
 fig.savefig("tests/pheatmap.png")
 ```
